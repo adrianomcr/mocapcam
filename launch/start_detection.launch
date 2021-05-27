@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<launch>
+
+
+	<include file="$(find mocapcam)/launch/start_cam.launch" />
+
+	<!--Run the aruco detection-->
+	<node pkg="mocapcam" name="detection" type="detect.py" args="" output="screen">
+		<param name="aruco_size" type="double" value="72.26" />
+		<param name="aruco_pose" type="string" value="[[0,-1,0,0],[-1,0,0,0],[0,0,-1,0],[0,0,0,1]]" />
+		<param name="image_topic" type="string" value="/usb_cam/" /> <!-- camera_info and image_raw -->
+		<param name="pose_topic" type="string" value="aruco_pose" />
+	</node>
+
+	<node pkg="tf" type="static_transform_publisher" name="camera_pose_broadcaster" args="-0.4614 0.0651 0.5775 -0.6400 0.6192 -0.3090 0.3340 world camera 100" />
+
+</launch>

@@ -1,0 +1,26 @@
+image_width: 640
+image_height: 480
+camera_name: usb_cam
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [824.2284110000001, 0, 313.800417, 0, 832.594775, 223.171746, 0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.037804, 0.138089, -0.005658, -0.001616, 0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [825.3342290000001, 0, 313.155333, 0, 0, 831.906433, 221.424936, 0, 0, 0, 1, 0]
+
+
+
+#This file was obtainned with
+#rosrun camera_calibration_parsers convert logitech_640_480.ini logitech_640_480.yaml
+#The file logitech_640_480.ini is basically what camera_calibration prints on terminal
