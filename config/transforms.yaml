@@ -1,5 +1,6 @@
 
-# Configuration file
+# Configuration file that contains some static transformations
+# Use the format with a position (p) and a quaternion (q) as [x, y, z,  qx, qy, qz, qw]
 
 # Transformation of the box center (b) with respect to the corner of the box (b0)
 pq_b_b0: [0.09, 0.09, 0.09,    0.0,  0.0, 0.0, 1.0]

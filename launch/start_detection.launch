@@ -7,8 +7,8 @@
 
 	<!--Run the aruco detection-->
 	<node pkg="mocapcam" name="detection" type="detect.py" args="" output="screen">
-		<param name="box_size" type="double" value="18.0" />
-		<param name="aruco_size" type="double" value="13.0" />
+		<param name="box_size" type="double" value="18.0" /> <!--not used for now-->
+		<param name="aruco_size" type="double" value="13.0" /> <!--not used for now-->
 		<param name="image_topic" type="string" value="/usb_cam/" /> <!-- camera_info and image_raw -->
 		<param name="pose_topic" type="string" value="box_pose" />
 

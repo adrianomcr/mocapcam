@@ -3,15 +3,11 @@ import rospy
 import cv2
 from cv2 import aruco
 import numpy as np
-import matplotlib.pyplot as plt
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image, CameraInfo
 from geometry_msgs.msg import Pose
 from visualization_msgs.msg import Marker
-
-from tf.transformations import quaternion_matrix
-
-from tf.transformations import rotation_matrix, quaternion_from_matrix
+from tf.transformations import quaternion_matrix, quaternion_from_matrix
 import tf
 
 
@@ -41,9 +37,9 @@ class box_detection:
 		self.H_b_r = [[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]
 		self.H_c_w = [[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]
 
+		# Init ros node
 		nodename = "detection"
 		rospy.init_node(nodename, anonymous=True)
-
 
 		#Load parameters
 		try:
@@ -73,6 +69,7 @@ class box_detection:
 			self.H_b_b0[2][3] = self.pq_b_b0[2]
 			self.H_b_b0 = np.array(self.H_b_b0)
 
+			# Print the read parameters
 			print "\n\33[92mParameters loaded\33[0m"
 			print "\33[94maruco_size: ", aruco_size,"\33[0m"
 			print "\33[94mbox_size: ", box_size,"\33[0m"
@@ -116,7 +113,7 @@ class box_detection:
 
 
 
-	# Callback to get the topic image
+	# Callback to get the image
 	def callback_image(self, data):
 
 		# Convert image to opencv
@@ -139,7 +136,7 @@ class box_detection:
 
 		#Create and publish an image with the deteted corners
 		frame_markers = aruco.drawDetectedMarkers(filtered_image.copy(), self.corners, ids)
-		#Check corners ids
+		#Put corner ids
 		if ids is not None:
 			for i in range(ids.size):
 				for k in [1,2,3,4]:
@@ -202,14 +199,14 @@ class box_detection:
 			pixel2d = pixel2d + self.corners[k].tolist()[0]
 			box3d = box3d + pts3d
 
-		# Execute PnP and get the position of the "corner frame" with respect to the camera frame
+		# Execute PnP and get the position of the corner frame (b0) with respect to the camera frame (c)
 		succes, rvecs, tvecs = cv2.solvePnP(np.array(box3d), np.array(pixel2d), self.intrinsic_matrix, self.distortion_matrix, flags=cv2.SOLVEPNP_ITERATIVE)
 		# Transform the result into a homogeneous matrix H_b0_c
 		rot_mat, _ = cv2.Rodrigues(rvecs) 
 		R_ = np.concatenate((rot_mat,tvecs), axis=1 )
 		H_b0_c = np.concatenate((R_,np.array([[0,0,0,1]])), axis = 0) # box corner (b0) with respect to camera (c)
 
-		#Compute pose of the box center with respect to the world
+		#Compute pose of the box center (b) with respect to the world (w)
 		#H_b_w = H_c_w * H_b0_c * H_b_b0
 		H_b_c = H_b0_c.dot(self.H_b_b0) # box center (b) with respect to camera (c)
 		H_b_w = self.H_c_w.dot(H_b_c) # box center (b) with respect to world (w)
