@@ -1,0 +1,37 @@
+
+# Parameters associated to the calibration proccess
+# In thie proccess, the user will need to place the box in different poses
+
+# Number of poses used to calibrate the camera position (at least 1)
+n_poses: 3
+
+base_frame: "center"
+#options are: corner, center, robot
+
+# Below, each H_i (i = 1, 2, ...) is a homoheneous matrix that represents the pose of the frame "base_frame" with respect to the world
+
+# First pose for calibration
+H_1: [[1.0, 0.0, 0.0, 0.0],
+      [0.0, 1.0, 0.0, 0.0],
+      [0.0, 0.0, 1.0, 0.0],
+      [0.0, 0.0, 0.0, 1.0]]
+
+# Second pose for calibration ...
+H_2: [[1.0, 0.0, 0.0, -0.40],
+      [0.0, 1.0, 0.0, 0.0],
+      [0.0, 0.0, 1.0, 0.0],
+      [0.0, 0.0, 0.0, 1.0]]
+
+H_3: [[-1.0, 0.0, 0.0, 0.60],
+      [0.0, -1.0, 0.0, 0.30],
+      [0.0, 0.0, 1.0, 0.0],
+      [0.0, 0.0, 0.0, 1.0]]
+
+
+# If n_poses > 3, add the new transformations here ...
+
+# H_4: ...
+
+# H_5: ...
+
+# H_6: ...

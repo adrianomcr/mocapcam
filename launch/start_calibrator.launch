@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<launch>
+
+	<!--Launch the camera-->
+	<include file="$(find mocapcam)/launch/start_cam.launch" />
+
+	<!--Run the calibrator-->
+	<node pkg="mocapcam" name="calibrator" type="calibrator.py" args="" output="screen">
+		<param name="image_topic" type="string" value="/usb_cam/" /> <!-- camera_info and image_raw -->
+		<rosparam command="load" file="$(find mocapcam)/config/transforms.yaml" /> <!--The calibrator does not use pq_c_w-->
+		<rosparam command="load" file="$(find mocapcam)/config/calibration.yaml" />
+	</node>
+
+
+
+</launch>

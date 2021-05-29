@@ -1,0 +1,26 @@
+image_width: 1280
+image_height: 960
+camera_name: narrow_stereo
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [1492.811904, 0, 568.137184, 0, 1500.337828, 412.512343, 0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [0.07374499999999999, -0.386067, 0.002033, 0.007307999999999999, 0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [1495.152344, 0, 572.355432, 0, 0, 1508.875, 413.085075, 0, 0, 0, 1, 0]
+
+
+
+#This file was obtainned with
+#rosrun camera_calibration_parsers convert logitech_1280_960.ini logitech_1280_960.yaml
+#The file logitech_1280_960.ini is basically what camera_calibration prints on terminal
