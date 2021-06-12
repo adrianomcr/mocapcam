@@ -9,5 +9,5 @@ pq_b_b0: [0.09, 0.09, 0.09,    0.0,  0.0, 0.0, 1.0]
 pq_b_r: [0.0, 0.0, 0.3,    0.7071,  0.7071, 0.0, 0.0]
 
 # Transformation of the camera (c) with respect to the world (w)
-# IMPORTANT: this imformation can be found with the conde calibrator.py [roslaunch mocapcan start_calibrator]
+# IMPORTANT: this imformation can be obtained with the code calibrator.py [roslaunch mocapcan start_calibrator]
 pq_c_w: [-1.2890, 0.0490, 1.0484, -0.6253, 0.6435, -0.2950, 0.3285]

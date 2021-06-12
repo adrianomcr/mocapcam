@@ -323,7 +323,7 @@ class camera_calibrator:
 if __name__ == '__main__':
 
 	try:
-		Detect_box = camera_calibrator()		
+		Calibrator = camera_calibrator()		
 	except rospy.ROSInterruptException:
 		pass
 

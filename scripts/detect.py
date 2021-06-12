@@ -95,7 +95,7 @@ class box_detection:
 		self.pub_marker = rospy.Publisher("box_marker", Marker, queue_size=1)
 
 
-		# Keep a loop only to send astatic transform
+		# Keep a loop only to send a static transform
 		rate = rospy.Rate(30)
 		while not rospy.is_shutdown():
 
