@@ -1,0 +1,25 @@
+image_width: 320
+image_height: 240
+camera_name: narrow_stereo
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [422.928043, 0, 160.23882, 0, 425.030736, 117.552853, 0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.038026, 0.190067, -0.004256999999999999, -3.7e-05, 0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [424.227295, 0, 160.228108, 0, 0, 425.374939, 116.888623, 0, 0, 0, 1, 0]
+
+
+#This file was obtainned with
+#rosrun camera_calibration_parsers convert logitech_320_240.ini logitech_320_240.yaml
+#The file logitech_640_480.ini is basically what camera_calibration prints on terminal
