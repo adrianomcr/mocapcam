@@ -43,8 +43,8 @@ class box_detection:
 
 		#Load parameters
 		try:
-			aruco_size = rospy.get_param("/"+nodename+"/aruco_size")
-			box_size = rospy.get_param("/"+nodename+"/box_size")
+			self.aruco_size = rospy.get_param("/"+nodename+"/aruco_size")
+			self.box_size = rospy.get_param("/"+nodename+"/box_size")
 			image_topic = rospy.get_param("/"+nodename+"/image_topic")
 			pose_topic = rospy.get_param("/"+nodename+"/pose_topic")
 
@@ -71,8 +71,8 @@ class box_detection:
 
 			# Print the read parameters
 			print "\n\33[92mParameters loaded\33[0m"
-			print "\33[94maruco_size: ", aruco_size,"\33[0m"
-			print "\33[94mbox_size: ", box_size,"\33[0m"
+			print "\33[94maruco_size: ", self.aruco_size,"\33[0m"
+			print "\33[94mbox_size: ", self.box_size,"\33[0m"
 			print "\33[94mimage_topic: ", image_topic,"\33[0m"
 			print "\33[94mpose_topic: ", pose_topic,"\33[0m"
 			print "\33[94mpq_b_r: ", self.pq_b_r,"\33[0m"
@@ -167,29 +167,39 @@ class box_detection:
 		box3d = [] #list of physical points in 3d
 		pixel2d = [] #list of corner image points in 2d
 
+		#Values used to define the position of the ArUco corners with respect to the "corner frame"
+		A = self.aruco_size
+		B = self.box_size
+		C = (B-A)/2.0
+		D = B-C
+
 		# For each detected ArUco
 		for k in range(0,ids.size):
 
 			# Get the associated 3d points in the "corner frame" according to the aruco id
 			if (ids[k] == 1):
-				# pts3d = [[0.0,6.7,80.7],[0.0,7.8,8.3],[0.0,77.5,6.7],[0.0,78.7,80.1]] #small wood
-				pts3d = [[16.1,15.7,0.0],[2.5,15.8,0.0],[2.5,2.2,0.0],[16.0,2.1,0.0]] #big polystyrene
+				#pts3d = [[16.1,15.7,0.0],[2.5,15.8,0.0],[2.5,2.2,0.0],[16.0,2.1,0.0]] #measured
+				pts3d = [[D,D,0.0],[C,D,0.0],[C,C,0.0],[D,C,0.0]] #generic
 				pts3d = (np.array(pts3d)/100.0).tolist()
 			elif (ids[k] == 2):
-				# pts3d = [[9.5,79.8,0.0],[10.1,9.8,0.0],[83.6,8.7,0.0],[84,80.4,0.0]]  #small wood
-				pts3d = [[16.0,0.0,2.4],[2.5,0.0,2.5],[2.2,0.0,16.1],[15.9,0.0,15.9]] #big polystyrene
+				#pts3d = [[16.0,0.0,2.4],[2.5,0.0,2.5],[2.2,0.0,16.1],[15.9,0.0,15.9]] #measured
+				pts3d = [[D,0.0,C],[C,0.0,C],[C,0.0,D],[D,0.0,D]] #generic
 				pts3d = (np.array(pts3d)/100.0).tolist()
 			elif (ids[k] == 3):
-				pts3d = [[0.0,2.3,2.3],[0.0,15.9,2.4],[0.0,15.8,15.9],[0.0,2.1,15.8]] #big polystyrene
+				#pts3d = [[0.0,2.3,2.3],[0.0,15.9,2.4],[0.0,15.8,15.9],[0.0,2.1,15.8]] #measured
+				pts3d = [[0.0,C,C],[0.0,D,C],[0.0,D,D],[0.0,C,D]] #generic
 				pts3d = (np.array(pts3d)/100.0).tolist()
 			elif (ids[k] == 4):
-				pts3d = [[18.1,15.7,2.7],[18.1,2.0,2.6],[18.1,2.1,16.2],[18.1,15.8,16.3]] #big polystyrene
+				#pts3d = [[18.1,15.7,2.7],[18.1,2.0,2.6],[18.1,2.1,16.2],[18.1,15.8,16.3]] #measured
+				pts3d = [[B,D,C],[B,C,C],[B,C,D],[B,D,D]] #generic
 				pts3d = (np.array(pts3d)/100.0).tolist()
 			elif (ids[k] == 5):
-				pts3d = [[2.4,18.0,2.3],[16.0,18.0,2.5],[15.9,18.0,16.0],[2.3,18.0,15.9]] #big polystyrene
+				#pts3d = [[2.4,18.0,2.3],[16.0,18.0,2.5],[15.9,18.0,16.0],[2.3,18.0,15.9]] #measured
+				pts3d = [[C,B,C],[D,B,C],[D,B,D],[C,B,D]] #generic
 				pts3d = (np.array(pts3d)/100.0).tolist()
 			elif (ids[k] == 6):
-				pts3d = [[2.2,15.7,18.4],[15.9,15.7,18.4],[15.9,2.1,18.4],[2.2,2.1,18.4]] #big polystyrene
+				#pts3d = [[2.2,15.7,18.4],[15.9,15.7,18.4],[15.9,2.1,18.4],[2.2,2.1,18.4]] #measured
+				pts3d = [[C,D,B],[D,D,B],[D,C,B],[C,C,B]] #generic
 				pts3d = (np.array(pts3d)/100.0).tolist()
 			else:
 				print "\33[93mAruco out of range 1-6 detected\33[0m"

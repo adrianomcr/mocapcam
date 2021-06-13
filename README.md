@@ -38,7 +38,7 @@ The position of the ArUcos in the faces of the cube should be in agreement with 
 
 ![image](https://github.com/adrianomcr/mocapcam/blob/main/images/box_pattern.png)
 
-The parameter `B` is the size of the box and `A` the size of the ArUco.
+The parameter `B` is the size of the box and `A` the size of the ArUco. These parameters `aruco_size` (equivalent to `A`) and `box_size` (equivalent to `B`) are defined in the the launch files.
 
 Currently, the code used the 4x4 ArUco dictionary (see `https://chev.me/arucogen/`). This can be modified in the script `detect.py`.
 

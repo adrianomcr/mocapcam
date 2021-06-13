@@ -264,26 +264,34 @@ class camera_calibrator:
 		# For each detected ArUco
 		for k in range(0,ids.size):
 
+
 			# Get the associated 3d points in the "corner frame" according to the aruco id
 			if (ids[k] == 1):
-				pts3d = [[16.1,15.7,0.0],[2.5,15.8,0.0],[2.5,2.2,0.0],[16.0,2.1,0.0]] #big polystyrene
+				#pts3d = [[16.1,15.7,0.0],[2.5,15.8,0.0],[2.5,2.2,0.0],[16.0,2.1,0.0]] #measured
+				pts3d = [[D,D,0.0],[C,D,0.0],[C,C,0.0],[D,C,0.0]] #generic
 				pts3d = (np.array(pts3d)/100.0).tolist()
 			elif (ids[k] == 2):
-				pts3d = [[16.0,0.0,2.4],[2.5,0.0,2.5],[2.2,0.0,16.1],[15.9,0.0,15.9]] #big polystyrene
+				#pts3d = [[16.0,0.0,2.4],[2.5,0.0,2.5],[2.2,0.0,16.1],[15.9,0.0,15.9]] #measured
+				pts3d = [[D,0.0,C],[C,0.0,C],[C,0.0,D],[D,0.0,D]] #generic
 				pts3d = (np.array(pts3d)/100.0).tolist()
 			elif (ids[k] == 3):
-				pts3d = [[0.0,2.3,2.3],[0.0,15.9,2.4],[0.0,15.8,15.9],[0.0,2.1,15.8]] #big polystyrene
+				#pts3d = [[0.0,2.3,2.3],[0.0,15.9,2.4],[0.0,15.8,15.9],[0.0,2.1,15.8]] #measured
+				pts3d = [[0.0,C,C],[0.0,D,C],[0.0,D,D],[0.0,C,D]] #generic
 				pts3d = (np.array(pts3d)/100.0).tolist()
 			elif (ids[k] == 4):
-				pts3d = [[18.1,15.7,2.7],[18.1,2.0,2.6],[18.1,2.1,16.2],[18.1,15.8,16.3]] #big polystyrene
+				#pts3d = [[18.1,15.7,2.7],[18.1,2.0,2.6],[18.1,2.1,16.2],[18.1,15.8,16.3]] #measured
+				pts3d = [[B,D,C],[B,C,C],[B,C,D],[B,D,D]] #generic
 				pts3d = (np.array(pts3d)/100.0).tolist()
 			elif (ids[k] == 5):
-				pts3d = [[2.4,18.0,2.3],[16.0,18.0,2.5],[15.9,18.0,16.0],[2.3,18.0,15.9]] #big polystyrene
+				#pts3d = [[2.4,18.0,2.3],[16.0,18.0,2.5],[15.9,18.0,16.0],[2.3,18.0,15.9]] #measured
+				pts3d = [[C,B,C],[D,B,C],[D,B,D],[C,B,D]] #generic
 				pts3d = (np.array(pts3d)/100.0).tolist()
 			elif (ids[k] == 6):
-				pts3d = [[2.2,15.7,18.4],[15.9,15.7,18.4],[15.9,2.1,18.4],[2.2,2.1,18.4]] #big polystyrene
+				#pts3d = [[2.2,15.7,18.4],[15.9,15.7,18.4],[15.9,2.1,18.4],[2.2,2.1,18.4]] #measured
+				pts3d = [[C,D,B],[D,D,B],[D,C,B],[C,C,B]] #generic
 				pts3d = (np.array(pts3d)/100.0).tolist()
 			else:
+				print "\33[93mAruco out of range 1-6 detected\33[0m"
 				continue
 
 			
