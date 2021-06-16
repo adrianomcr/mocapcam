@@ -282,9 +282,9 @@ class box_detection:
 		marker.type = marker.CUBE
 		marker.action = marker.ADD
 		# Size of sphere
-		marker.scale.x = 0.18
-		marker.scale.y = 0.18
-		marker.scale.z = 0.18
+		marker.scale.x = self.box_size/100.0
+		marker.scale.y = self.box_size/100.0
+		marker.scale.z = self.box_size/100.0
 		# Color and transparency
 		marker.color.a = 0.7
 		marker.color.r = 0.99
