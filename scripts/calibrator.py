@@ -79,14 +79,14 @@ class camera_calibrator:
 
 			self.base_frame = rospy.get_param("/"+nodename+"/base_frame")
 
-			aruco_size = rospy.get_param("/"+nodename+"/aruco_size")
-			box_size = rospy.get_param("/"+nodename+"/box_size")
+			self.aruco_size = rospy.get_param("/"+nodename+"/aruco_size")
+			self.box_size = rospy.get_param("/"+nodename+"/box_size")
 			image_topic = rospy.get_param("/"+nodename+"/image_topic")
 
 			# Print the read parameters
 			print "\n\33[92mParameters loaded\33[0m"
-			print "\33[94maruco_size: ", aruco_size,"\33[0m"
-			print "\33[94mbox_size: ", box_size,"\33[0m"
+			print "\33[94maruco_size: ", self.aruco_size,"\33[0m"
+			print "\33[94mbox_size: ", self.box_size,"\33[0m"
 			print "\33[94mimage_topic: ", image_topic,"\33[0m"
 			print "\33[94mn_poses: ", n_poses,"\33[0m"
 			print "\33[94mbase_frame: ", self.base_frame,"\33[0m"
@@ -260,6 +260,12 @@ class camera_calibrator:
 
 		box3d = [] #list of physical points in 3d
 		pixel2d = [] #list of corner image points in 2d
+
+		#Values used to define the position of the ArUco corners with respect to the "corner frame"
+		A = self.aruco_size
+		B = self.box_size
+		C = (B-A)/2.0
+		D = B-C
 
 		# For each detected ArUco
 		for k in range(0,ids.size):
