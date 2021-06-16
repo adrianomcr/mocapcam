@@ -28,7 +28,7 @@ You will need to get the parameters of your camera. I recommend to the package c
 $ sudo apt install ros-$ROS_DISTRO-camera-calibration
 ```
 
-You will also need to construct a ArUco box with your preferred size.
+You will also need to construct an ArUco box with your preferred size.
 
 
 
@@ -38,7 +38,7 @@ The position of the ArUcos in the faces of the cube should be in agreement with 
 
 ![image](https://github.com/adrianomcr/mocapcam/blob/main/images/box_pattern.png)
 
-The parameter `B` is the size of the box and `A` the size of the ArUco. These parameters `aruco_size` (equivalent to `A`) and `box_size` (equivalent to `B`) are defined in the the launch files.
+The parameter `B` is the size of the box and `A` the size of the ArUco. These parameters `aruco_size` (equivalent to `A`) and `box_size` (equivalent to `B`) are defined in the the launch files. The values should be passed in centimeters.
 
 Currently, the code used the 4x4 ArUco dictionary (see `https://chev.me/arucogen/`). This can be modified in the script `detect.py`.
 
